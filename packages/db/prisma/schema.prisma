@@ -18,10 +18,10 @@ enum tokenType {
   ETHUSDC
 }
 model User {
-  id            String      @id @default(uuid())
-  email         String      @unique
-  lastLoggedIn  DateTime? 
-
+  id              String        @id @default(uuid())
+  email           String        @unique
+  lastLoggedIn    DateTime? 
+  existingTrades  ExistingTrade[]
 }
 
 model Asset {
@@ -30,11 +30,21 @@ model Asset {
   imageUrl      String?
   name          String
   decimals      Int
-
+  existingTrades  ExistingTrade[]
 }
 
 model ExistingTrade {
   id                String      @id @default(uuid())
   openPrice         BigInt
-  openPriceDecimal  Int          
+  openPriceDecimal  Int         @default(2)
+  closePrice        BigInt
+  closePriceDecimal Int         @default(2)
+  leverage          Int         @default(1)
+  pnl               Int?
+  asset             Asset       @relation(fields: [assetId], references: [id])
+  assetId           String
+  liquidated        Boolean
+  user              User        @relation(fields: [userId], references: [id])
+  userId            String
+  createdAt         DateTime    @default(now())       
 }
