@@ -1,0 +1,23 @@
+{
+  "name": "@repo/redis",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "pnpm run build"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/ioredis": "^5.0.0",
+    "ioredis": "^5.7.0"
+  },
+  "exports": {
+    "./client": "./dist/index.js"
+  }
+}

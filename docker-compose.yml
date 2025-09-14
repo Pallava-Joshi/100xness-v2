@@ -1,13 +1,19 @@
 version: "3.8"
+
 services:
-  postgres:
-    image: postgres:13
-    environment:
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
-      POSTGRES_DB: mydb
+  redis:
+    image: redis:latest
     ports:
-      - "5433:5432" # Host_port:Container_port
+      - "6379:6379" # Exposes Redis to host
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: db
+    ports:
+      - "5433:5432" # Maps Postgres to host
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
